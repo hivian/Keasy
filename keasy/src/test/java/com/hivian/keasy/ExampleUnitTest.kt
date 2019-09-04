@@ -1,4 +1,4 @@
-package com.hivian.easykotlinandroid
+package com.hivian.keasy
 
 import org.junit.Test
 

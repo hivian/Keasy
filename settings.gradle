@@ -1,2 +1,2 @@
-include ':app'
-rootProject.name='EasyKotlinAndroid'
+include ':app', ':keasy'
+rootProject.name='Keasy'

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">keasy</string>
+
+    <string name="anim_menu_duration" translatable="false">300</string>
+</resources>
