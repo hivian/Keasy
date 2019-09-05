@@ -2,14 +2,11 @@ package com.hivian.keasy
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.text.Editable
-import android.text.TextWatcher
+import android.os.Build
+import android.os.SystemClock
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -17,13 +14,9 @@ import android.view.ViewTreeObserver
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.DatePicker
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.annotation.ColorRes
-import androidx.annotation.DimenRes
 import androidx.annotation.IdRes
-import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -31,15 +24,7 @@ import com.github.ajalt.timberkt.d
 import com.hivian.keasysample.R
 import java.util.*
 
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object: TextWatcher {
-        override fun afterTextChanged(s: Editable?) { afterTextChanged.invoke(s.toString()) }
 
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-    })
-}
 
 inline fun <reified T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
     viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -52,26 +37,17 @@ inline fun <reified T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
     })
 }
 
-fun EditText.validate(validator: (String) -> Boolean, message: String) {
-    this.afterTextChanged {
-        this.error = if (validator(it)) null else message
-    }
-    this.error = if (validator(this.text.toString())) null else message
-}
+inline fun View.setOnDebouncedClickListener(minimumInterval: Long = 1000, crossinline onClick : (View) -> Unit) {
+    var lastClickTime = 0L
 
-fun View.setOnDebouncedClickListener(onClick : (View) -> Unit) {
-    setOnClickListener(object : DebouncedClickListener() {
-        override fun onDebouncedClick(v: View) {
-            onClick(v)
+    setOnClickListener { view ->
+        val previousClickTimestamp = lastClickTime
+        val currentTimestamp = SystemClock.uptimeMillis()
+
+        lastClickTime = currentTimestamp
+        if (previousClickTimestamp == 0L || currentTimestamp - previousClickTimestamp > minimumInterval) {
+            onClick(view)
         }
-    })
-}
-
-fun ImageView.setTint(@ColorRes colorRes: Int?) {
-    if (colorRes != null) {
-        imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, colorRes))
-    } else {
-        imageTintList = null
     }
 }
 
@@ -164,32 +140,64 @@ fun View.addCircleRipple() = with(TypedValue()) {
     setBackgroundResource(resourceId)
 }
 
-fun TextView.bold() {
-    typeface = Typeface.DEFAULT_BOLD
+fun View.elevate(elevation: Float) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) setElevation(elevation)
+    else ViewCompat.setElevation(this, elevation)
 }
 
-fun TextView.italic() {
-    setTypeface(null, Typeface.ITALIC)
-}
+fun View.elevate(elevation: Int) = elevate(elevation.toFloat())
 
-fun View.margin(@DimenRes left: Int? = null, @DimenRes top: Int? = null,
-                @DimenRes right: Int? = null, @DimenRes bottom: Int? = null) {
+fun View.margin(left: Int? = null, top: Int? = null,
+                right: Int? = null, bottom: Int? = null) {
     layoutParams<ViewGroup.MarginLayoutParams> {
-        left?.let { leftMargin = it.px }
-        top?.let { topMargin = it.px }
-        right?.let { rightMargin = it.px }
-        bottom?.let { bottomMargin = it.px }
+        left?.let { leftMargin = it.toPx }
+        top?.let { topMargin = it.toPx }
+        right?.let { rightMargin = it.toPx }
+        bottom?.let { bottomMargin = it.toPx }
     }
 }
 
-fun View.padding(@DimenRes left: Int = 0, @DimenRes top: Int = 0,
-                 @DimenRes right: Int = 0, @DimenRes bottom: Int = 0) {
-    setPadding(left.px, top.px, right.dp, bottom.dp)
+fun View.marginDp(left: Int? = null, top: Int? = null,
+                right: Int? = null, bottom: Int? = null) {
+    margin(left?.toPx, top?.toPx, right?.toPx, bottom?.toPx)
 }
+
+fun View.padding(left: Int = 0, top: Int = 0,
+                   right: Int = 0, bottom: Int = 0) {
+    setPadding(left.toPx, top.toPx, right.toDp, bottom.toDp)
+}
+
+fun View.paddingDp(left: Int = 0, top: Int = 0,
+                 right: Int = 0, bottom: Int = 0) {
+    padding(left.toPx, top.toPx, right.toDp, bottom.toDp)
+}
+
+fun View.setWidth(width : Int) {
+    layoutParams<ViewGroup.LayoutParams> {
+        this.width = width
+    }
+}
+
+var View.widthDp : Int
+    get() = width.toDp
+    set(value) = setWidth(value.toPx)
+
+fun View.setHeight(height : Int) {
+    layoutParams<ViewGroup.LayoutParams> {
+        this.height = height
+    }
+}
+
+var View.heightDp : Int
+    get() = height.toDp
+    set(value) = setHeight(value.toPx)
+
 
 inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() -> Unit) {
     if (layoutParams is T) block(layoutParams as T)
 }
 
-//fun View.dpToPx(dp: Float): Int = context.dpToPx(dp)
-//fun Context.dpToPx(dp: Float): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
+
+
+//fun View.dpToPx(toDp: Float): Int = context.dpToPx(toDp)
+//fun Context.dpToPx(toDp: Float): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toDp, resources.displayMetrics).toInt()
