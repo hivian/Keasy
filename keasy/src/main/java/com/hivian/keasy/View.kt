@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.DatePicker
 import android.widget.ImageView
 import androidx.annotation.IdRes
 import androidx.core.view.ViewCompat
@@ -21,8 +20,6 @@ import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.github.ajalt.timberkt.d
-import com.hivian.keasysample.R
-import java.util.*
 
 
 
@@ -95,12 +92,6 @@ fun View.animateBottomToTopIn(onAnimationEnd : () -> Unit) {
         override fun onAnimationStart(p0: Animation?) {}
     })
     startAnimation(animBottomToTopIn)
-}
-
-fun DatePicker.getDate() : Date {
-    val calendar = Calendar.getInstance()
-    calendar.set(year, month, dayOfMonth)
-    return calendar.time
 }
 
 fun View.getTagString(@IdRes id : Int) : String {
@@ -196,7 +187,6 @@ var View.heightDp : Int
 inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() -> Unit) {
     if (layoutParams is T) block(layoutParams as T)
 }
-
 
 
 //fun View.dpToPx(toDp: Float): Int = context.dpToPx(toDp)

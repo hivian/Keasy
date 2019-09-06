@@ -3,6 +3,7 @@ package com.hivian.keasy
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Point
 import android.net.Uri
@@ -11,6 +12,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.content.FileProvider
+import com.hivian.keasy.R
 
 
 inline fun <reified T: Activity> Context.startCustomActivity(extras : Bundle?= null, action : String ?= null, data: Uri?= null) {
@@ -67,4 +70,21 @@ fun Activity.showGalleryChooser(requestCode: Int) {
         action = Intent.ACTION_PICK
     }
     startActivityForResult(Intent.createChooser(intent, "Select Picture"), requestCode)
+}
+
+fun Context.createChooser(title : String, message : String, bitmap : Bitmap ?= null) {
+    val context = this
+    val sendIntent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, message)
+        type = if (bitmap != null) {
+            val file = bitmap.toFile(context)
+            val uri = FileProvider.getUriForFile(context, getString(R.string.file_provider_authority), file)
+            putExtra(Intent.EXTRA_STREAM, uri)
+            "image/*"
+        } else {
+            "text/plain"
+        }
+    }
+    startActivity(Intent.createChooser(sendIntent, title))
 }
