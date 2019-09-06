@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED", "NOTHING_TO_INLINE")
+
 package com.hivian.keasy
 
 import android.util.Patterns
@@ -18,7 +20,7 @@ val String.isValidEmail : Boolean get() = isNotEmpty() && Patterns.EMAIL_ADDRESS
 
 val String.isValidUrl : Boolean get() = isNotEmpty() && Patterns.WEB_URL.matcher(this).matches()
 
-fun String.extractUrls() : List<String>? {
+inline fun String.extractUrls() : List<String>? {
     val urls = ArrayList<String>()
     val matcher = Patterns.WEB_URL.matcher(this)
 
@@ -33,13 +35,13 @@ fun String.extractUrls() : List<String>? {
     }
 }
 
-val String.isYoutubeLink : Boolean get() = isValidUrl && this.matches(Regex(".*(youtube|youtu.be).*"))
+inline val String.isYoutubeLink : Boolean get() = isValidUrl && this.matches(Regex(".*(youtube|youtu.be).*"))
 
-fun String.isValidPhoneNumber(countryCode : String ?= null) : Boolean {
+inline fun String.isValidPhoneNumber(countryCode : String ?= null) : Boolean {
     val phoneUtil = PhoneNumberUtil.getInstance()
     val parseNumber : Phonenumber.PhoneNumber
     try {
-        parseNumber = phoneUtil.parse(this, (countryCode ?: Locale.getDefault().country).toUpperCase())
+        parseNumber = phoneUtil.parse(this, (countryCode ?: Locale.getDefault().country).toUpperCase(Locale.getDefault()))
     } catch (e: NumberParseException) {
         return false
     }
@@ -47,19 +49,19 @@ fun String.isValidPhoneNumber(countryCode : String ?= null) : Boolean {
     return phoneUtil.isValidNumber(parseNumber)
 }
 
-fun String.formatPhoneE164(countryCode : String ?= null) : String {
+inline fun String.formatPhoneE164(countryCode : String ?= null) : String {
     val phoneUtil = PhoneNumberUtil.getInstance()
-    val parseNumber = phoneUtil.parse(this, (countryCode ?: Locale.getDefault().country).toUpperCase())
+    val parseNumber = phoneUtil.parse(this, (countryCode ?: Locale.getDefault().country).toUpperCase(Locale.getDefault()))
     return phoneUtil.format(parseNumber, PhoneNumberUtil.PhoneNumberFormat.E164)
 }
 
-val String.md5: String get() {
+inline val String.md5: String get() {
     val md = MessageDigest.getInstance("MD5")
     return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32, '0')
 }
 
 
-val String.isValidJson: Boolean get() {
+inline val String.isValidJson: Boolean get() {
     try {
         JSONObject(this)
     } catch (ex: JSONException) {
@@ -72,10 +74,10 @@ val String.isValidJson: Boolean get() {
     return true
 }
 
-val String.isInt : Boolean get() = toIntOrNull() != null
+inline val String.isInt : Boolean get() = toIntOrNull() != null
 
-val String.isLong : Boolean get() = toLongOrNull() != null
+inline val String.isLong : Boolean get() = toLongOrNull() != null
 
-val String.isFloat : Boolean get() = toFloatOrNull() != null
+inline val String.isFloat : Boolean get() = toFloatOrNull() != null
 
-val String.isDouble : Boolean get() = toDoubleOrNull() != null
+inline val String.isDouble : Boolean get() = toDoubleOrNull() != null

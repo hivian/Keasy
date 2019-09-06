@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED", "NOTHING_TO_INLINE")
+
 package com.hivian.keasy
 
 import android.graphics.Typeface
@@ -6,7 +8,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
 
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+inline fun EditText.afterTextChanged(crossinline afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object: TextWatcher {
         override fun afterTextChanged(s: Editable?) { afterTextChanged.invoke(s.toString()) }
 
@@ -16,21 +18,21 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     })
 }
 
-fun EditText.validate(validator: (String) -> Boolean, message: String) {
+inline fun EditText.validate(crossinline validator: (String) -> Boolean, message: String) {
     this.afterTextChanged {
         this.error = if (validator(it)) null else message
     }
     this.error = if (validator(this.text.toString())) null else message
 }
 
-fun TextView.bold() {
+inline fun TextView.bold() {
     typeface = Typeface.DEFAULT_BOLD
 }
 
-fun TextView.italic() {
+inline fun TextView.italic() {
     setTypeface(null, Typeface.ITALIC)
 }
 
-fun TextView.boldItalic() {
+inline fun TextView.boldItalic() {
     setTypeface(null, Typeface.BOLD_ITALIC)
 }

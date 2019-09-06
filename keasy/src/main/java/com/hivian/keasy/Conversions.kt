@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED", "NOTHING_TO_INLINE")
+
 package com.hivian.keasy
 
 import android.content.Context
@@ -16,7 +18,7 @@ val Float.toPx : Int get() = (this * Resources.getSystem().displayMetrics.densit
 
 
 @Throws(NullPointerException::class, IOException::class)
-fun Bitmap.toFile(context: Context): File {
+inline fun Bitmap.toFile(context: Context): File {
     val file = File(context.externalCacheDir, System.currentTimeMillis().toString() + ".png")
     val fOut = FileOutputStream(file)
     compress(Bitmap.CompressFormat.PNG, 100, fOut)
@@ -26,7 +28,7 @@ fun Bitmap.toFile(context: Context): File {
     return file
 }
 
-fun Bitmap.toFileOrNull(context: Context) : File? = try {
+inline fun Bitmap.toFileOrNull(context: Context) : File? = try {
     toFile(context)
 } catch (e : Exception) {
     e.printStackTrace()
@@ -34,7 +36,7 @@ fun Bitmap.toFileOrNull(context: Context) : File? = try {
 }
 
 @Throws(OutOfMemoryError::class)
-fun Drawable.toBitmap(): Bitmap {
+inline fun Drawable.toBitmap(): Bitmap {
     val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
     setBounds(0, 0, canvas.width, canvas.height)
@@ -43,7 +45,7 @@ fun Drawable.toBitmap(): Bitmap {
     return bitmap
 }
 
-fun Drawable.toBitmapOrNull() : Bitmap? = try {
+inline fun Drawable.toBitmapOrNull() : Bitmap? = try {
     toBitmap()
 } catch (e: Exception) {
     e.printStackTrace()

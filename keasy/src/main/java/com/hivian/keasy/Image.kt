@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED", "NOTHING_TO_INLINE")
+
 package com.hivian.keasy
 
 
@@ -8,7 +10,7 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 
 
-fun ImageView.setTint(@ColorInt color: Int?) {
+inline fun ImageView.setTint(@ColorInt color: Int?) {
     imageTintList = if (color != null) {
         ColorStateList.valueOf(color)
     } else {
@@ -16,6 +18,6 @@ fun ImageView.setTint(@ColorInt color: Int?) {
     }
 }
 
-fun ImageView.setTintRes(@ColorRes colorRes: Int) {
+inline fun ImageView.setTintRes(@ColorRes colorRes: Int) {
     setTint(ContextCompat.getColor(context, colorRes))
 }

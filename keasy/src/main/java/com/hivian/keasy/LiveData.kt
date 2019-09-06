@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED", "NOTHING_TO_INLINE")
+
 package com.hivian.keasy
 
 import android.os.Handler
@@ -7,12 +9,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 
-fun <T> LiveData<T>.reObserve(owner: LifecycleOwner, observer: Observer<T>) {
+inline fun <T> LiveData<T>.reObserve(owner: LifecycleOwner, observer: Observer<T>) {
     removeObserver(observer)
     observe(owner, observer)
 }
 
-fun <T> LiveData<T>.debounce(duration: Long = 1000L) = MediatorLiveData<T>().also { mld ->
+inline fun <T> LiveData<T>.debounce(duration: Long = 1000L) = MediatorLiveData<T>().also { mld ->
     val source = this
     val handler = Handler(Looper.getMainLooper())
 
@@ -26,7 +28,7 @@ fun <T> LiveData<T>.debounce(duration: Long = 1000L) = MediatorLiveData<T>().als
     }
 }
 
-fun <T> LiveData<T>.getDistinct(): LiveData<T> {
+inline fun <T> LiveData<T>.getDistinct(): LiveData<T> {
     val distinctLiveData = MediatorLiveData<T>()
     distinctLiveData.addSource(this, object : Observer<T> {
         private var initialized = false
