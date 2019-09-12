@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED", "NOTHING_TO_INLINE")
 
-package com.hivian.keasy
+package com.hivian.keasy.extensions
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -22,7 +22,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.github.ajalt.timberkt.d
-
+import com.hivian.keasy.R
 
 
 inline fun <reified T: View> T.afterMeasured(crossinline f: T.() -> Unit) {

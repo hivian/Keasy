@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED", "NOTHING_TO_INLINE")
 
-package com.hivian.keasy
+package com.hivian.keasy.extensions
 
 import android.util.Patterns
 import com.google.i18n.phonenumbers.NumberParseException
