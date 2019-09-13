@@ -16,8 +16,15 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.content.FileProvider
 import com.hivian.keasy.R
+import com.hivian.keasy.extensions.conversions.toFileOrNull
 
 
+const val TEXT_MIME = "text/plain"
+const val IMAGE_MIME = "image/*"
+
+/**
+ * Start activity passing optional [extras], [action] and [data] as arguments
+ */
 inline fun <reified T: Activity> Context.startCustomActivity(extras : Bundle?= null, action : String ?= null, data: Uri?= null) {
     startActivity(Intent(this, T::class.java).apply {
         extras?.let { putExtras(extras) }
@@ -26,6 +33,9 @@ inline fun <reified T: Activity> Context.startCustomActivity(extras : Bundle?= n
     })
 }
 
+/**
+ * Hide activity's current focus and keyboard
+ */
 inline fun Activity.hideKeyboard() {
     // check if no view has focus:
     val view = currentFocus
@@ -34,12 +44,18 @@ inline fun Activity.hideKeyboard() {
     inputManager.hideSoftInputFromWindow(view?.windowToken, 0)
 }
 
+/**
+ * Show EditText's keyboard
+ */
 inline fun EditText.showKeyboard() {
     requestFocus()
     val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 }
 
+/**
+ * Start Application Details settings activity
+ */
 inline fun Context.startAppSettings() {
     startActivity(Intent().apply {
         action = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
@@ -52,6 +68,10 @@ inline fun <reified T: Activity> Activity.myStartActivityForResult(requestCode: 
     startActivityForResult(intent, requestCode)
 }
 
+/**
+ * Get screen dimensions
+ * Return [Point]
+ */
 inline fun Activity.getScreenDimension() : Point {
     val display = windowManager.defaultDisplay
     val size = Point()
@@ -59,6 +79,9 @@ inline fun Activity.getScreenDimension() : Point {
     return size
 }
 
+/**
+ * Change status bar color of `this` activity
+ */
 inline fun Activity.setWhiteStatusBar() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -66,6 +89,9 @@ inline fun Activity.setWhiteStatusBar() {
     }
 }
 
+/**
+ * Start gallery intent activity with [requestCode] to identify the result
+ */
 inline fun Activity.showGalleryChooser(requestCode: Int) {
     val intent = Intent().apply {
         type = "image/*"
@@ -74,18 +100,21 @@ inline fun Activity.showGalleryChooser(requestCode: Int) {
     startActivityForResult(Intent.createChooser(intent, "Select Picture"), requestCode)
 }
 
+/**
+ * Start share intent activity with custom [title], [message] and optional [bitmap] for sharing image
+ */
 inline fun Context.createChooser(title : String, message : String, bitmap : Bitmap ?= null) {
     val context = this
     val sendIntent = Intent().apply {
         action = Intent.ACTION_SEND
         putExtra(Intent.EXTRA_TEXT, message)
-        type = if (bitmap != null) {
-            val file = bitmap.toFile(context)
-            val uri = FileProvider.getUriForFile(context, getString(R.string.file_provider_authority), file)
-            putExtra(Intent.EXTRA_STREAM, uri)
-            "image/*"
-        } else {
-            "text/plain"
+        type = bitmap.letOrElse({ TEXT_MIME }) { b ->
+            val file = b.toFileOrNull(context)
+            file.letOrElse({ TEXT_MIME }) {
+                val uri = FileProvider.getUriForFile(context, getString(R.string.file_provider_authority), it)
+                putExtra(Intent.EXTRA_STREAM, uri)
+                IMAGE_MIME
+            }
         }
     }
     startActivity(Intent.createChooser(sendIntent, title))

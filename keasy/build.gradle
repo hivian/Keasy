@@ -27,7 +27,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.github.ajalt:timberkt:1.5.1'
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.10.18'
     implementation 'org.jsoup:jsoup:1.12.1'
     implementation 'com.google.android.gms:play-services-location:17.0.0'

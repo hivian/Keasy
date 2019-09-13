@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED", "NOTHING_TO_INLINE")
 
-package com.hivian.keasy.extensions
+package com.hivian.keasy.extensions.conversions
 
 import android.content.Context
 import android.content.res.Resources
@@ -13,10 +13,10 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-val Int.toDp : Int get() = (this / Resources.getSystem().displayMetrics.density).toInt()
-val Float.toDp : Int get() = (this / Resources.getSystem().displayMetrics.density).toInt()
-val Int.toPx : Int get() = (this * Resources.getSystem().displayMetrics.density).toInt()
-val Float.toPx : Int get() = (this * Resources.getSystem().displayMetrics.density).toInt()
+inline fun Int.toDp() : Int = (this / Resources.getSystem().displayMetrics.density).toInt()
+inline fun Float.toDp() : Int = (this / Resources.getSystem().displayMetrics.density).toInt()
+inline fun Int.toPx() : Int = (this * Resources.getSystem().displayMetrics.density).toInt()
+inline fun Float.toPx() : Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 
 inline fun Int.toHex() : String  = Integer.toHexString(this)
 

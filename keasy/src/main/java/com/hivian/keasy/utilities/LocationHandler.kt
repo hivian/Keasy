@@ -14,7 +14,7 @@ import com.google.android.gms.location.LocationServices
 
 object LocationHandler {
 
-    @RequiresPermission(anyOf = [Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION ])
+    @RequiresPermission(anyOf = [ Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION ])
     inline fun getLastLocation(context : Context, crossinline onSuccess : (Location) -> Unit, crossinline onFailure : () -> Unit) {
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
         fusedLocationClient.lastLocation
@@ -31,7 +31,7 @@ object LocationHandler {
             }
     }
 
-    @RequiresPermission(anyOf = [Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION ])
+    @RequiresPermission(anyOf = [ Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION ])
     inline fun requestLocationUpdate(context : Context, crossinline onSuccess : (Location) -> Unit) {
         val locationRequest = LocationRequest.create()
         locationRequest.interval = 10000

@@ -21,8 +21,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import com.github.ajalt.timberkt.d
 import com.hivian.keasy.R
+import com.hivian.keasy.extensions.conversions.Dp
+import com.hivian.keasy.extensions.conversions.Px
+import com.hivian.keasy.extensions.conversions.toDp
+import com.hivian.keasy.extensions.conversions.toPx
 
 
 inline fun <reified T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
@@ -105,17 +108,15 @@ inline fun ImageView.loadDrawable(drawable : Drawable?) {
     drawable?.let { setImageDrawable(drawable)  }
 }
 
-inline fun ImageView.loadBitmap(bitmap: Bitmap) {
+inline fun ImageView.createBitmap(bitmap: Bitmap) {
     setImageBitmap(bitmap)
 }
 
-inline fun View.loadBitmapFromView(): Bitmap? {
+inline fun View.toBitmap(): Bitmap? {
     return try {
-        d { "loadBitmapFromView: $width, $height" }
         val b = Bitmap.createBitmap(width,
                 height, Bitmap.Config.ARGB_8888)
         val c = Canvas(b)
-        //view.layout(0, 0, view.getWidth(), view.getHeight());
         draw(c)
         b
     } catch (exception : IllegalArgumentException) {
@@ -140,50 +141,50 @@ inline fun View.elevate(elevation: Float) {
 
 inline fun View.elevate(elevation: Int) = elevate(elevation.toFloat())
 
-inline fun View.margin(left: Int? = null, top: Int? = null,
-                right: Int? = null, bottom: Int? = null) {
+inline fun View.margin(@Px left: Int? = null, @Px top: Int? = null,
+                       @Px right: Int? = null, @Px bottom: Int? = null) {
     layoutParams<ViewGroup.MarginLayoutParams> {
-        left?.let { leftMargin = it.toPx }
-        top?.let { topMargin = it.toPx }
-        right?.let { rightMargin = it.toPx }
-        bottom?.let { bottomMargin = it.toPx }
+        left?.let { leftMargin = it.toPx() }
+        top?.let { topMargin = it.toPx() }
+        right?.let { rightMargin = it.toPx() }
+        bottom?.let { bottomMargin = it.toPx() }
     }
 }
 
-inline fun View.marginDp(left: Int? = null, top: Int? = null,
-                right: Int? = null, bottom: Int? = null) {
-    margin(left?.toPx, top?.toPx, right?.toPx, bottom?.toPx)
+inline fun View.marginDp(@Dp left: Int? = null, @Dp top: Int? = null,
+                         @Dp right: Int? = null, @Dp bottom: Int? = null) {
+    margin(left?.toPx(), top?.toPx(), right?.toPx(), bottom?.toPx())
 }
 
-inline fun View.padding(left: Int = 0, top: Int = 0,
-                   right: Int = 0, bottom: Int = 0) {
-    setPadding(left.toPx, top.toPx, right.toDp, bottom.toDp)
+inline fun View.padding(@Px left: Int = 0, @Px top: Int = 0,
+                        @Px right: Int = 0, @Px bottom: Int = 0) {
+    setPadding(left, top, right, bottom)
 }
 
-inline fun View.paddingDp(left: Int = 0, top: Int = 0,
-                 right: Int = 0, bottom: Int = 0) {
-    padding(left.toPx, top.toPx, right.toDp, bottom.toDp)
+inline fun View.paddingDp(@Dp left: Int = 0, @Dp top: Int = 0,
+                          @Dp right: Int = 0, @Dp bottom: Int = 0) {
+    padding(left.toPx(), top.toPx(), right.toPx(), bottom.toPx())
 }
 
-inline fun View.setWidth(width : Int) {
+inline fun View.setWidth(@Px width : Int) {
     layoutParams<ViewGroup.LayoutParams> {
         this.width = width
     }
 }
 
 inline var View.widthDp : Int
-    get() = width.toDp
-    set(value) = setWidth(value.toPx)
+    get() = width.toDp()
+    set(value) = setWidth(value.toPx())
 
-inline fun View.setHeight(height : Int) {
+inline fun View.setHeight(@Px height : Int) {
     layoutParams<ViewGroup.LayoutParams> {
         this.height = height
     }
 }
 
 inline var View.heightDp : Int
-    get() = height.toDp
-    set(value) = setHeight(value.toPx)
+    get() = height.toDp()
+    set(value) = setHeight(value.toPx())
 
 
 inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() -> Unit) {

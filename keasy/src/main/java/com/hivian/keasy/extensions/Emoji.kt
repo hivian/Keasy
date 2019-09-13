@@ -2,6 +2,8 @@
 
 package com.hivian.keasy.extensions
 
+import com.hivian.keasy.extensions.conversions.toHex
+
 enum class UnicodeRange(val rawValue : IntRange) {
     EMOTICONS(0x1F600..0x1F636),
     DINGBATS(0x2702..0x27B0),
