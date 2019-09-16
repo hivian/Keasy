@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED", "NOTHING_TO_INLINE")
 
-package com.hivian.keasy.extensions
+package com.hivian.keasy.extensions.observer
 
 import android.os.Handler
 import android.os.Looper

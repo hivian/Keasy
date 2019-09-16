@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED", "NOTHING_TO_INLINE")
 
-package com.hivian.keasy.extensions
+package com.hivian.keasy.extensions.context
 
 import android.app.Activity
 import android.content.Context
@@ -13,10 +13,10 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.core.content.FileProvider
 import com.hivian.keasy.R
 import com.hivian.keasy.extensions.conversions.toFileOrNull
+import com.hivian.keasy.extensions.standard.letOrElse
 
 
 const val TEXT_MIME = "text/plain"
@@ -44,14 +44,7 @@ inline fun Activity.hideKeyboard() {
     inputManager.hideSoftInputFromWindow(view?.windowToken, 0)
 }
 
-/**
- * Show EditText's keyboard
- */
-inline fun EditText.showKeyboard() {
-    requestFocus()
-    val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-}
+
 
 /**
  * Start Application Details settings activity

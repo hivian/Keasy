@@ -2,7 +2,7 @@
 
 package com.hivian.keasy.utilities
 
-import com.hivian.keasy.extensions.isValidUrl
+import com.hivian.keasy.extensions.types.isValidUrl
 import org.jsoup.Jsoup
 import java.io.IOException
 import java.util.*

@@ -1,12 +1,9 @@
-@file:Suppress("UNUSED", "NOTHING_TO_INLINE")
+package com.hivian.keasy.extensions.observer
 
-package com.hivian.keasy.extensions
-
-import android.graphics.Typeface
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import android.widget.TextView
+
 
 inline fun EditText.afterTextChanged(crossinline afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object: TextWatcher {
@@ -23,16 +20,4 @@ inline fun EditText.validate(crossinline validator: (String) -> Boolean, message
         this.error = if (validator(it)) null else message
     }
     this.error = if (validator(this.text.toString())) null else message
-}
-
-inline fun TextView.bold() {
-    typeface = Typeface.DEFAULT_BOLD
-}
-
-inline fun TextView.italic() {
-    setTypeface(null, Typeface.ITALIC)
-}
-
-inline fun TextView.boldItalic() {
-    setTypeface(null, Typeface.BOLD_ITALIC)
 }

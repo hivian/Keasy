@@ -1,8 +1,6 @@
 @file:Suppress("UNUSED", "NOTHING_TO_INLINE")
 
-package com.hivian.keasy.extensions
-
-import com.hivian.keasy.extensions.conversions.toHex
+package com.hivian.keasy.extensions.conversions
 
 enum class UnicodeRange(val rawValue : IntRange) {
     EMOTICONS(0x1F600..0x1F636),

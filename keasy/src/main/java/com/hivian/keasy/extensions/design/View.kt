@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED", "NOTHING_TO_INLINE")
 
-package com.hivian.keasy.extensions
+package com.hivian.keasy.extensions.design
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -106,10 +106,6 @@ inline fun View.getTagString(@IdRes id : Int) : String {
 inline fun ImageView.loadDrawable(drawable : Drawable?) {
     //Glide.with(this).load(drawable).into(this)
     drawable?.let { setImageDrawable(drawable)  }
-}
-
-inline fun ImageView.createBitmap(bitmap: Bitmap) {
-    setImageBitmap(bitmap)
 }
 
 inline fun View.toBitmap(): Bitmap? {
