@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED", "NOTHING_TO_INLINE")
 
-package com.hivian.keasy.extensions
+package com.hivian.keasy.extensions.standard
 
 /**
  * Returns the next enum value as declared in the class. If this is the last enum declared,
