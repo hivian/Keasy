@@ -11,6 +11,12 @@ enum class UnicodeRange(val rawValue : IntRange) {
     COUNTRY_FLAGS(0x1F1E6..0x1F1FF)
 }
 
+/**
+ * Returns random Unicode value from [UnicodeRange]
+ */
 inline fun UnicodeRange.pickRandom() : Int = rawValue.shuffled().last()
 
+/**
+ * Returns random Unicode value from [UnicodeRange] and converts it to hexadecimal string
+ */
 inline fun UnicodeRange.pickRandomHex() : String = "&#x${pickRandom().toHex()};"

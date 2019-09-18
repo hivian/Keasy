@@ -7,6 +7,9 @@ import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 
+/**
+ *
+ */
 inline fun View.snack(message: String, length: Int = Snackbar.LENGTH_LONG, noinline f: (Snackbar.() -> Unit)? = null) {
     val snack = Snackbar.make(this, message, length)
     if (f != null) snack.f()

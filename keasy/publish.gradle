@@ -11,14 +11,14 @@ ext {
     libraryName = 'keasy'
     artifact = 'keasy'
 
-    libraryDescription = 'Kotlin extensions and method utilities for Android development'
+    libraryDescription = 'Kotlin extensions and utility functions for Android'
     libraryTags = ['android', 'kotlin', 'extension', 'methods', 'utils']
 
     siteUrl = 'https://github.com/hivian/' + bintrayName
     gitUrl = siteUrl + '.git'
     gitTrackerUrl = siteUrl + '/issues'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = appVersion.name
 
     developerId = 'hivian'
     developerName = 'hivian'
