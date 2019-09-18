@@ -4,8 +4,6 @@ package com.hivian.keasy.extensions.design
 
 import android.content.Context
 import android.graphics.Typeface
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView

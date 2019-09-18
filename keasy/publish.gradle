@@ -11,7 +11,7 @@ ext {
     libraryName = 'keasy'
     artifact = 'keasy'
 
-    libraryDescription = 'Kotlin extensions and method utilities for Android development'
+    libraryDescription = 'Kotlin extensions and utility functions for Android development'
     libraryTags = ['android', 'kotlin', 'extension', 'methods', 'utils']
 
     siteUrl = 'https://github.com/hivian/' + bintrayName
