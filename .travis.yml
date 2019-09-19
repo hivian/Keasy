@@ -1,6 +1,7 @@
-anguage: android
+language: android
+jdk: oraclejdk8
 dist: trusty
 android:
   components:
-    # BuildTools version used by this project
     - build-tools-29.0.4
+    - android-29
