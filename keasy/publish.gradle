@@ -95,8 +95,12 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-    user properties.getProperty('bintray.user')
-    key properties.getProperty('bintray.apikey')
+    // Local publish
+    //user properties.getProperty('bintray.user')
+    //key properties.getProperty('bintray.apikey')
+    // Travis environment variable
+    user System.getenv('BINTRAY_USER')
+    key System.getenv('BINTRAY_API_KEY')
 
     configurations = ['archives']
     pkg {
