@@ -14,6 +14,8 @@ android:
   components:
     - build-tools-29.0.4
     - android-29
+  licenses:
+    - 'android-sdk-license-.+'
 
 deploy:
   provider: script
