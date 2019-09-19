@@ -8,7 +8,7 @@ buildscript {
                 'name' : '1.1.0'
         ]
         versions = [
-                'compileSdk' : 29,
+                'compileSdk' : 28,
                 'minSdk' : 21,
                 'targetSdk' : 29,
                 'gradle' : '3.5.0',
