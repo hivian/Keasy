@@ -91,11 +91,12 @@ artifacts {
     archives sourcesJar
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+// If local publish
+//Properties properties = new Properties()
+//properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-    // Local publish
+    // If local publish
     //user properties.getProperty('bintray.user')
     //key properties.getProperty('bintray.apikey')
     // Travis environment variable
