@@ -1,7 +1,7 @@
 # Keasy
 
+[![Build status](https://travis-ci.org/hivian/keasy.svg?branch=master)](https://travis-ci.org/hivian/keasy)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.3-blue)
-![Gradle](https://img.shields.io/badge/Gradle-3.5-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
 Kotlin extensions and utility functions for Android
