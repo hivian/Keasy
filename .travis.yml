@@ -15,6 +15,9 @@ android:
     - build-tools-29.0.4
     - android-29
 
+script:
+  - ./gradlew clean build
+
 deploy:
   provider: script
   script: ./gradlew :clean :keasy:assembleRelease :keasy:bintrayUpload
