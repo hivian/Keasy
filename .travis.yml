@@ -35,6 +35,7 @@ android:
   components:
     - platform-tools
     - tools
+    - android-22
     - sys-img-$ANDROID_ABI-android-$EMULATOR_API_LEVEL
     - extra-android-m2repository
     - extra-google-m2repository
