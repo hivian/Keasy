@@ -50,6 +50,10 @@ Extensions for validating and formatting phone numbers easily, when using [libph
 
 General purpose extensions unrelated to any specific domain.
 
+### Web
+
+Extensions for url validation and format.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
