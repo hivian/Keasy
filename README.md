@@ -20,7 +20,7 @@ repositories {
 Add the following dependency to your `app/build.gradle`:
 ```
 dependencies {
-    implementation 'com.github.hivian:keasy:1.1.0'
+    implementation 'com.github.hivian:keasy:1.2.0'
 }
 ```
 
