@@ -24,13 +24,13 @@ dependencies {
 }
 ```
 
-## Features available
+## Extensions
 
 ### Context
 
 Extensions linked to Context or Activity, such as starting custom or system activities.
 
-### Context
+### Conversions
 
 Extensions for usefull conversions between types, dp to pixels & and vice versa, drawable to bitmap etc.
 
@@ -53,6 +53,10 @@ General purpose extensions unrelated to any specific domain.
 ### Web
 
 Extensions for url validation and format.
+
+## Utilities
+
+Bitmap caching, Location handler ...
 
 ## License
 
