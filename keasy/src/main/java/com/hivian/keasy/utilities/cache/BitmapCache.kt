@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED", "NOTHING_TO_INLINE")
 
-package com.hivian.keasy.utilities
+package com.hivian.keasy.utilities.cache
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -11,11 +11,14 @@ import java.io.IOException
 
 object BitmapCache {
 
-    fun saveToInternalDir(context: Context, b: Bitmap, picName: String) {
+    /**
+     * Save a [bitmap] using [picName] on internal storage.
+     */
+    fun saveToInternalDir(context: Context, bitmap: Bitmap, picName: String) {
         var fos : FileOutputStream ?= null
         try {
             fos = context.openFileOutput(picName, Context.MODE_PRIVATE)
-            b.compress(Bitmap.CompressFormat.PNG, 100, fos)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
         } catch (e: IOException) {
             e.printStackTrace()
         } finally {
@@ -23,6 +26,9 @@ object BitmapCache {
         }
     }
 
+    /**
+     * Load the bitmap with [picName] from internal storage.
+     */
     fun loadFromInternalDir(context: Context, picName: String): Bitmap? {
         var b: Bitmap? = null
         var fis : FileInputStream ?= null
