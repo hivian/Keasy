@@ -53,4 +53,4 @@ deploy:
   dry-run: false
   on:
     branch: master
-    tags: true  #Deploy only if tagged version
+    tags: true  # deploy only if tagged version

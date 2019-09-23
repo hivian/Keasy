@@ -11,6 +11,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
+        <!-- Library initialization purpose. Not exposed to other apps -->
+        <provider
+            android:authorities="${applicationId}.threeTenProvider"
+            android:exported="false"
+            android:enabled="true"
+            android:name=".ThreeTenProvider" />
     </application>
 
 </manifest>
