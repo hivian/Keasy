@@ -4,8 +4,8 @@ buildscript {
     ext {
         // Common version between app, core and bintray
         appVersion = [
-                'code' : 110,
-                'name' : '1.1.0'
+                'code' : 120,
+                'name' : '1.2.0'
         ]
         versions = [
                 'compileSdk' : 28,

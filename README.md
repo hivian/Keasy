@@ -1,8 +1,8 @@
 # Keasy
 
-![Kotlin](https://img.shields.io/badge/Kotlin-1.3-blue)
-![Gradle](https://img.shields.io/badge/Gradle-3.5-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-blue)
+[![Build status](https://travis-ci.org/hivian/keasy.svg?branch=master)](https://travis-ci.org/hivian/keasy)
+[![Download](https://api.bintray.com/packages/hivian/maven/keasy/images/download.svg?version=1.2.0)](https://bintray.com/hivian/maven/keasy/1.2.0/link)
+[![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/hivian/keasy/edit/master/LICENSE)
 
 Kotlin extensions and utility functions for Android
 
@@ -20,17 +20,17 @@ repositories {
 Add the following dependency to your `app/build.gradle`:
 ```
 dependencies {
-    implementation 'com.github.hivian:keasy:1.1.0'
+    implementation 'com.github.hivian:keasy:1.2.0'
 }
 ```
 
-## Features available
+## Extensions
 
 ### Context
 
 Extensions linked to Context or Activity, such as starting custom or system activities.
 
-### Context
+### Conversions
 
 Extensions for usefull conversions between types, dp to pixels & and vice versa, drawable to bitmap etc.
 
@@ -54,6 +54,10 @@ General purpose extensions unrelated to any specific domain.
 
 Extensions for url validation and format.
 
+## Utilities
+
+Bitmap caching, Location handler ...
+
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
