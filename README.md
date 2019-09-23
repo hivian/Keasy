@@ -1,8 +1,8 @@
 # Keasy
 
 [![Build status](https://travis-ci.org/hivian/keasy.svg?branch=master)](https://travis-ci.org/hivian/keasy)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.3-blue)
-![License](https://img.shields.io/badge/License-MIT-blue)
+[![Download](https://api.bintray.com/packages/hivian/maven/keasy/images/download.svg?version=1.2.0)](https://bintray.com/hivian/maven/keasy/1.2.0/link)
+[![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/hivian/keasy/edit/master/LICENSE)
 
 Kotlin extensions and utility functions for Android
 
