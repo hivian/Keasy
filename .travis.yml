@@ -47,7 +47,7 @@ android:
     - google-gdk-license-.+
 
 script:
-  - ./gradlew :keasy:connectedCheck :keasy:test :keasy:assembleRelease -PdisablePreDex --stacktrace
+  - ./gradlew clean :keasy:testDebug :keasy:connectedCheck :keasy:assembleRelease -PdisablePreDex --stacktrace
 
 deploy:
   provider: script
