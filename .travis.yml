@@ -46,9 +46,12 @@ android:
     - android-sdk-license-.+
     - google-gdk-license-.+
 
+script:
+  - ./gradlew :keasy:connectedCheck :keasy:test :keasy:assembleRelease -PdisablePreDex --stacktrace
+
 deploy:
   provider: script
-  script: ./gradlew :clean :keasy:assembleRelease :keasy:bintrayUpload
+  script: ./gradlew :keasy:bintrayUpload
   skip_cleanup: true # to upload artifacts created during the build
   dry-run: false
   on:
