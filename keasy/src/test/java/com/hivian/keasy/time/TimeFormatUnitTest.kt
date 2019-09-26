@@ -1,9 +1,7 @@
 package com.hivian.keasy.time
 
-import com.hivian.keasy.extensions.time.toISO
-import com.hivian.keasy.extensions.time.toISO8601
-import com.hivian.keasy.extensions.time.toISO8601UTC
-import org.junit.Assert.assertEquals
+import com.hivian.keasy.extensions.time.*
+import org.junit.Assert.*
 import org.junit.Test
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
@@ -15,51 +13,56 @@ import org.threeten.bp.format.DateTimeParseException
 class TimeFormatUnitTest {
 
     @Test
-    fun convertStringToISO() {
+    fun convertDateToISO() {
         val dateString = "2019-09-24"
         val date = LocalDate.parse(dateString)
 
         assertEquals(dateString, date.toISO())
     }
 
-    @Test(expected = DateTimeParseException::class)
-    fun convertStringToISOError() {
-        val dateString = "2019-09 -24"
+    @Test
+    fun convertDateToISO8601() {
+        val dateString = "2019-09-24T15:53:00.717706"
+        val date = LocalDateTime.parse(dateString)
+
+        assertEquals(dateString, date.toISO8601())
+    }
+
+    @Test
+    fun convertDateToISO8601UTC() {
+        val dateString = "2019-09-24T15:53:00.717706+02:00"
+        val date = OffsetDateTime.parse(dateString)
+
+        assertEquals(dateString, date.toISO8601UTC())
+    }
+
+    @Test
+    fun convertISOtoDate() {
+        val dateString = "2019-09-24"
+        val formatErrorString = "2019-09 -24"
         val date = LocalDate.parse(dateString)
 
-        assertEquals(dateString, date.toISO())
+        assertEquals(date, dateString.fromISO())
+        assertNull(formatErrorString.fromISOOrNull())
     }
 
     @Test
-    fun convertStringToISO8601() {
+    fun convertISO8601toDate() {
         val dateString = "2019-09-24T15:53:00.717706"
-        val date = LocalDateTime.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+        val formatErrorString = "2019-09-24T15:53:00.717706+32:00"
+        val date = LocalDateTime.parse(dateString)
 
-        assertEquals(dateString, date.toISO8601())
-    }
-
-    @Test(expected = DateTimeParseException::class)
-    fun convertStringToISO860Error() {
-        val dateString = "2019-0999-24T15:53:00.717706"
-        val date = LocalDateTime.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-
-        assertEquals(dateString, date.toISO8601())
+        assertEquals(date, dateString.fromISO8601())
+        assertNull(formatErrorString.fromISO8601OrNull())
     }
 
     @Test
-    fun convertStringToISO8601UTC() {
+    fun convertISO8601UTCtoDate() {
         val dateString = "2019-09-24T15:53:00.717706+02:00"
-        val date = OffsetDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        val formatErrorString = "2019-09-24T15:53:00.717706+32:00"
+        val date = OffsetDateTime.parse(dateString)
 
-        assertEquals(dateString, date.toISO8601UTC())
+        assertEquals(date, dateString.fromISO8601UTC())
+        assertNull(formatErrorString.fromISO8601UTCOrNull())
     }
-
-    @Test(expected = DateTimeParseException::class)
-    fun convertStringToISO8601UTCError() {
-        val dateString = "2019-09-24T15:53:00.717706+36:00"
-        val date = OffsetDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-
-        assertEquals(dateString, date.toISO8601UTC())
-    }
-
 }
