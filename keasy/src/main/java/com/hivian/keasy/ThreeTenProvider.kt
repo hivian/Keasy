@@ -3,10 +3,10 @@ package com.hivian.keasy
 import android.content.ContentProvider
 import android.content.ContentValues
 import android.content.Context
+import android.content.pm.ProviderInfo
 import android.database.Cursor
 import android.net.Uri
 import com.jakewharton.threetenabp.AndroidThreeTen
-import android.content.pm.ProviderInfo
 
 
 class ThreeTenProvider : ContentProvider() {
