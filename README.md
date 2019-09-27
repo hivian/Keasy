@@ -1,7 +1,7 @@
 # Keasy
 
 [![Build status](https://travis-ci.org/hivian/keasy.svg?branch=master)](https://travis-ci.org/hivian/keasy)
-[![Download](https://api.bintray.com/packages/hivian/maven/keasy/images/download.svg?version=1.2.0)](https://bintray.com/hivian/maven/keasy/1.2.0/link)
+[![Download](https://api.bintray.com/packages/hivian/maven/keasy/images/download.svg?version=1.3.0)](https://bintray.com/hivian/maven/keasy/1.3.0/link)
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/hivian/keasy/edit/master/LICENSE)
 
 Kotlin extensions and utility functions for Android
@@ -20,7 +20,7 @@ repositories {
 Add the following dependency to your `app/build.gradle`:
 ```
 dependencies {
-    implementation 'com.github.hivian:keasy:1.2.0'
+    implementation 'com.github.hivian:keasy:1.3.0'
 }
 ```
 
