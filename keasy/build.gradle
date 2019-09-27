@@ -49,7 +49,10 @@ dependencies {
 
     // An adaptation of the JSR-310 backport for Android.
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
-
+    // Standard JVM backport for unit testing
+    testImplementation("org.threeten:threetenbp:1.4.0") {
+        exclude module: "com.jakewharton.threetenabp:threetenabp:1.2.1"
+    }
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

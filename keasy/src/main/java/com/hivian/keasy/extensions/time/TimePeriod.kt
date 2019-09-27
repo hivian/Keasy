@@ -6,16 +6,14 @@ import org.threeten.bp.*
 
 
 inline fun now(): LocalDateTime = LocalDateTime.now()
-
 inline fun time(): LocalTime = LocalTime.now()
-
 inline fun date() : LocalDate = LocalDate.now()
 inline fun today()  : LocalDate = date()
 inline fun tomorrow()  : LocalDate = today() + 1.day
+inline fun yesterday()  : LocalDate = today() - 1.day
 inline fun nextWeek()  : LocalDate = today() + 1.week
 inline fun nextMonth()  : LocalDate = today() + 1.month
 inline fun nextYear()  : LocalDate = today() + 1.year
-inline fun yesterday()  : LocalDate = today() - 1.day
 inline fun lastWeek()  : LocalDate = today() - 1.week
 inline fun lastMonth()  : LocalDate = today() - 1.month
 inline fun lastYear()  : LocalDate = today() - 1.year
@@ -29,6 +27,8 @@ inline val LocalTime.fromNow: LocalDateTime get() = atDate(now())
 inline val Period.ago: LocalDateTime get() = now() - this
 inline val Period.fromNow: LocalDateTime get() = now() + this
 
+inline val Duration.ago: LocalDateTime get() = now() - this
+inline val Duration.fromNow: LocalDateTime get() = now() + this
 
 /*
     Handles intervals of years, months and days

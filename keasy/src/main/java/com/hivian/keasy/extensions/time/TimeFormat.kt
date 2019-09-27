@@ -14,7 +14,6 @@ inline fun String.fromISO() : LocalDate = LocalDate.parse(this)
 inline fun String.fromISOOrNull() = try {
     fromISO()
 } catch (e : DateTimeParseException) {
-    e.printStackTrace()
     null
 }
 
@@ -24,7 +23,6 @@ inline fun String.fromISO8601() : LocalDateTime = LocalDateTime.parse(this)
 inline fun String.fromISO8601OrNull() = try {
     fromISO8601()
 } catch (e : DateTimeParseException) {
-    e.printStackTrace()
     null
 }
 
@@ -34,7 +32,6 @@ inline fun String.fromISO8601UTC() : OffsetDateTime = OffsetDateTime.parse(this)
 inline fun String.fromISO8601UTCOrNull() = try {
     fromISO8601UTC()
 } catch (e : DateTimeParseException) {
-    e.printStackTrace()
     null
 }
 
